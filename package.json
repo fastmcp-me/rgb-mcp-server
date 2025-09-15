@@ -1,0 +1,31 @@
+{
+  "name": "rgb-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for RGB API JS SDK integration",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc && npm run minify",
+    "minify": "terser dist/index.js -c -m -o dist/index.min.js && terser dist/server.js -c -m -o dist/server.min.js && terser dist/rgb-client.js -c -m -o dist/rgb-client.min.js && terser dist/types.js -c -m -o dist/types.min.js && rm dist/index.js dist/server.js dist/rgb-client.js dist/types.js && mv dist/index.min.js dist/index.js && mv dist/server.min.js dist/server.js && mv dist/rgb-client.min.js dist/rgb-client.js && mv dist/types.min.js dist/types.js",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "rgb",
+    "lightning",
+    "bitcoin"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@lnfi-network/rgb-api-js-sdk": "^1.0.1",
+    "@modelcontextprotocol/sdk": "^1.7.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "terser": "^5.24.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -9,6 +9,31 @@ A Model Context Protocol (MCP) server that provides integration with RGB Lightni
 - **Lightning Network**: Create/pay invoices, manage channels
 - **On-chain Transactions**: Generate addresses, send Bitcoin, list transactions
 - **Swap Operations**: List and manage asset swaps
+# Quick Start
+## npx
+Please replace with your RGB api key:
+xxxxxxxxxxxxxxxxxxxx
+
+**Using environment variables**
+```bash
+{
+    "mcpServers": {
+        "rgb-mcp-server": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "rgb-mcp-server"
+            ],
+            "env": {
+                "RGB_API_BASE_URL": "http://localhost:3000",
+                "RGB_API_KEY": "xxxxxxxxxxxxxxxxxxxx" // Required: RGB api key
+            }
+        }
+    }
+}
+```
+
+# Development
 
 ## Installation
 

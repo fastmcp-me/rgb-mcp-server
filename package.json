@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "MCP server for RGB API JS SDK integration",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "bin": {
     "rgb-mcp-server": "./dist/index.js"
   },

@@ -4,6 +4,22 @@ import { getRGBMcpServer } from './server.js';
 import { RGBApiConfig } from './types.js';
 import fs from 'fs';
 
+// Export for SDK usage
+export { getRGBMcpServer } from './server.js';
+export type { 
+  RGBApiConfig,
+  NodeInfo,
+  NodeState,
+  AssetInfo,
+  AssetBalance,
+  Transaction,
+  LightningInvoice,
+  LightningChannel,
+  SwapInfo,
+  SendAssetsParams,
+  SwapParams
+} from './types.js';
+
 function parseArgs(args: string[]): Record<string, string | undefined> {
   const parsed: Record<string, string | undefined> = {};
   

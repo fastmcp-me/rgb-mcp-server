@@ -10,12 +10,17 @@ A Model Context Protocol (MCP) server that provides integration with RGB Lightni
 - **On-chain Transactions**: Generate addresses, send Bitcoin, list transactions
 - **Swap Operations**: List and manage asset swaps
 # Quick Start
-## npx
-Please replace with your RGB api key:
-xxxxxxxxxxxxxxxxxxxx
 
-**Using environment variables**
-```bash
+## npx
+You can use this server directly with MCP clients like Cursor, Claude Desktop, Trae, or Cherry Studio by running
+
+**Note:** Please replace with your RGB api key:
+xxxxxxxxxxxxxxxxxxxx  Or /path/rgbapi.key
+
+## MCP Client Configuration
+Add this configuration to your MCP client (e.g., Claude Desktop config):
+
+```json
 {
     "mcpServers": {
         "rgb-mcp-server": {
@@ -26,7 +31,7 @@ xxxxxxxxxxxxxxxxxxxx
             ],
             "env": {
                 "RGB_API_BASE_URL": "http://localhost:3000",
-                "RGB_API_KEY": "xxxxxxxxxxxxxxxxxxxx" // Required: RGB api key
+                "RGB_API_KEY": "xxxxxxxxxxxxxxxxxxxx" //Optional: RGB api key Or /path/rgbapi.key
             }
         }
     }
@@ -35,59 +40,37 @@ xxxxxxxxxxxxxxxxxxxx
 
 # Development
 
+For developers who want to contribute or use this project:
+
 ## Installation
 
-```bash
-npm install
-npm run build
-```
-
-## Configuration
-
-Create a `.env` file based on `.env.example`:
+1. Make sure you have Node.js installed (version 16 or higher recommended)
+2. Install dependencies:
 
 ```bash
-cp .env.example .env
+npm install rgb-mcp-server
 ```
 
-Set the following environment variables:
+## Programmatic Usage
 
-- `RGB_API_BASE_URL`: Base URL of your RGB API server (default: http://localhost:3000)
-- `RGB_API_KEY`: Optional API key for authentication
-- `RGB_API_TIMEOUT`: Request timeout in milliseconds (default: 30000)
+After installing the package, you can use it programmatically in your Node.js application:
 
-## Usage
+```javascript
+import { getRGBMcpServer } from "rgb-mcp-server";
 
-### Command Line Arguments
+// Initialize the RGB MCP server
+const rgbMcpServer = await getRGBMcpServer({
+    baseUrl: process.env.RGB_API_BASE_URL || 'http://localhost:3000',  // RGB API server URL
+    apiKey: process.env.RGB_API_KEY,                                   // Optional: API key for authentication
+    timeout: 30000                                                     // Optional: request timeout in ms
+});
 
-The server supports both environment variables and command line arguments:
-
-```bash
-# Using environment variables
-RGB_API_BASE_URL=http://localhost:3000 RGB_API_KEY=your_key node dist/index.js
-
-# Using command line arguments
-node dist/index.js --baseUrl http://localhost:3000 --apiKey your_key
-
-# Alternative argument format
-node dist/index.js --base-url http://localhost:3000 --api-key your_key
-
-# API key can also be read from a file
-node dist/index.js --apiKey /path/to/keyfile
-
-# Set custom timeout
-node dist/index.js --timeout 60000
+// Access available tools
+const rgbTools = rgbMcpServer._registeredTools;
+console.log('Available RGB tools:', Object.keys(rgbTools));
 ```
 
-### Running the Server
 
-```bash
-# Development mode
-npm run dev
-
-# Production mode
-npm run build && npm start
-```
 
 ### Available Tools
 
@@ -107,43 +90,7 @@ The server provides the following MCP tools:
 12. `rgb_list_swaps` - List available swaps
 13. `rgb_create_swap` - Create a new asset swap
 
-## Integration with AI Assistants
 
-This MCP server can be integrated with Claude Desktop or other MCP-compatible clients. Add the following configuration to your MCP client:
-
-```json
-{
-  "mcpServers": {
-    "rgb-mcp-server": {
-      "command": "node",
-      "args": ["/path/to/rgb-api-mcp-server/dist/index.js"],
-      "env": {
-        "RGB_API_BASE_URL": "http://localhost:3000",
-        "RGB_API_KEY": "your_api_key"
-      }
-    }
-  }
-}
-```
-
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Run in development mode
-npm run dev
-
-# Build the project
-npm run build
-
-# Run linting
-npm run lint
-
-# Run tests
-npm test
-```
 
 ## License
 

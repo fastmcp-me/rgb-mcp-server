@@ -20,7 +20,7 @@ xxxxxxxxxxxxxxxxxxxx  Or /path/rgbapi.key
 ## MCP Client Configuration
 Add this configuration to your MCP client (e.g., Claude Desktop config):
 
-```json
+```bash
 {
     "mcpServers": {
         "rgb-mcp-server": {
